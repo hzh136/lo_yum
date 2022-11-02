@@ -1,0 +1,35 @@
+﻿case
+注意，多分支 case 条件语句只能判断变量中的值到底是什么，而不能像多分支if语句那样，可以判断多个条件，所以多分支 case 条件语句更加适合单条件多分支的情况。比如，我们在系统中经常看到请选择"yes/no"，或在命令的输出中选择是执行第一个选项，还是执行第二个选项（fdisk 命令）。
+case...esac为多选择语句，与其他语言中的switch ...case语句类似，是一种多分支选择结构，每个case分支用右圆括号开始，用两个分号；；表示break,即执行结束，跳出整个case...esac语句，esac作为结束标记。
+case  值 in
+  模式1）  
+   command1
+   command2
+    ...
+   ;;
+  模式2）
+   command1
+   command2
+    ...
+    ;;
+esac
+case 工作方式如上所示，取值后面必须为单词in，每一模式必须以右括号结束，取值可以为变量或常数，匹配发现取值符合某一模式后，其间所有命令开始执行直至 ；；。
+取值将检测匹配的每一个模式，一旦模式匹配，则执行完匹配模式相应命令后不再继续其他模式。如果获该值无一匹配模式，使用*号捕获该值，再执行后面的命令。
+------------------------------
+例：
+[root@localhost home]# cat ca1.sh
+#!/bin/bash
+echo "please betwwen enter 1-4:"
+read num
+case $num in
+  1) echo "you enter 1"
+  ;;
+  2) echo "you enter 2"
+  ;;
+  3) echo "you enter 3"
+  ;;
+  4) echo "you enter 4"
+  ;;
+  *) echo "you enter inconsisten"
+  ;;
+esac

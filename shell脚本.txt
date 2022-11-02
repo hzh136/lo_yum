@@ -1,0 +1,64 @@
+﻿
+#!/bin/bash
+useradd "$1"
+ echo "$2" | passwd --stdin "$1"
+
+
+-----------------------------------------
+. 检测本机当前用户是否为超级管理员， 如果是管理员， 则输出"you are manager"， 如果不是， 则输出“you are just an ordinary user”
+#!/bin/bash
+if [ $USER == "root" ]; then
+    echo "you are manager"
+  else
+    echo "you are just an ordinary user"
+fi
+----------------------------------------------
+. 依次提示用户输入 3 个整数， 脚本根据数字大小依次排序输出 3 个数字
+#!/bin/bash
+read -p "please enter a number:" n1
+read -p "please enter a number:" n2
+read -p "please enter a number:" n3
+tmp=0
+if [ $n1 -gt $n2 ];then
+  tmp=$n1
+  n1=$n2
+  n2=$tmp
+fi
+
+if [ $n1 -gt $n3 ];then
+   tmp=$n1
+   n1=$n3
+   n3=$tmp
+fi
+
+if [ $n2 -gt $n3 ];then
+   tmp=$n2
+   n2=$n3
+   n3=$tmp
+fi
+echo "The sorted is: $n1,$n2,$n3"
+-----------------------------
+#!/bin/bash
+for i in {50..102}
+do
+   ping -c2 -i0.3 -w1 192.168.1.$i &>/dev/null
+    if [ $? -eq 0 ];then
+       echo "192.168.1.$i is up"
+    else
+       echo "192.168.1.$i  is down"
+    fi
+done
+
+--------------------------
+乘法九九表
+-------------------
+cat chengfa.sh
+#!/bin/bash
+for i in `seq 9`
+do 
+    for j in `seq $i`
+    do
+       echo -n -e "$j*$i=$[j*i]\t"
+    done
+   echo
+done                       
